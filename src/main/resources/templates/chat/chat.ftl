@@ -131,10 +131,11 @@
                     img
                 </button>
             </div>
-            <textarea type="text" id="message" style="margin-left: 1vw;max-width: 495px;width: 70vw;font-size: 20px;height: 50px;border:none;border-radius: 3px"></textarea>
-            <div id="sendBox" style="width: 15vw;margin-left: 1vw; width: 15vw;height: 50px;margin-left: 1vw;display: flex; flex-direction: column;
+            <textarea type="text" id="message" style="margin-left: 5px;max-width: 495px;width: 50vw;font-size: 20px;height: 50px;border:none;border-radius: 3px"></textarea>
+            <div id="sendBox" style="width: 15vw;margin-left: 5px; width: 60px;height: 50px;display: flex; flex-direction: column;
     justify-content: flex-start;flex-wrap: nowrap;">
-                <button style="font-weight: bold;height: 50px;font-size: 20px; background-color: forestgreen;border:none;color: #e3e3e3 ;border-radius: 3px" onclick="sendMessage()">send</button>
+                <button style="font-weight: bold;width:60px;height: 50px;font-size: 20px; background-color: forestgreen;border:none;color: #e3e3e3 ;border-radius: 3px" onclick="sendMessage()">send
+                </button>
             </div>
         </div>
     </div>
@@ -201,6 +202,8 @@
         }
     }
 
+    let messageList = [];
+
     function getMessage() {
         // 发起get请求，获取新消息
         let xhr = new XMLHttpRequest();
@@ -209,9 +212,14 @@
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let data = JSON.parse(xhr.responseText);
                 if (data && data.length > 0) {
+                    if (messageList.length == data.length) {
+                        return;
+                    }
                     let chatBox = document.getElementById("chatBox");
-                    chatBox.innerHTML = "";
                     for (let i = 0; i < data.length; i++) {
+                        if (i < messageList.length) {
+                            continue;
+                        }
                         let div = document.createElement("div");
                         let innerHTML = '<div class="messageItem"><div class="messageHeader"> <div class="messageHeaderText">' + data[i].username + "</div></div>";
                         if (data[i].username === username) {
@@ -228,8 +236,10 @@
                             }
                         }
                         div.innerHTML = innerHTML;
+                        // 将 div 添加到 chatBox
                         chatBox.appendChild(div);
                     }
+                    messageList = data;
                     chatBox.scrollTop = chatBox.scrollHeight;
                 }
             }
