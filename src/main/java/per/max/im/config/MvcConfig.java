@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.MultipartConfigElement;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -38,8 +39,15 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
         registry.addResourceHandler("/expand/**").addResourceLocations("classpath:/static/expand/");
         registry.addResourceHandler("/page/**").addResourceLocations("classpath:/static/page/");
-        registry.addResourceHandler("/file/**").addResourceLocations(fileConfig.getRelativePath() + "/file/");
-
+        registry.addResourceHandler("/file/**").addResourceLocations("file:" + fileConfig.getRelativePath());
+        File file = new File(fileConfig.getRelativePath());
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        File imgFolder = new File(fileConfig.getRelativePath() + fileConfig.getImg());
+        if (!imgFolder.exists()) {
+            imgFolder.mkdirs();
+        }
     }
 
     @Bean

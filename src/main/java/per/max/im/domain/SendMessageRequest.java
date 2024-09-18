@@ -15,4 +15,6 @@ public class SendMessageRequest {
     private String channel;
 
     private String message;
+
+    private String messageType;
 }

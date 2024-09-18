@@ -1,5 +1,6 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+file/
 
 ### STS ###
 .apt_generated

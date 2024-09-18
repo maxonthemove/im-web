@@ -36,6 +36,6 @@ web-socket:
   host: wss://localhost/ws
 
 file:
-  relative-path: ./file/
+  relative-path: ${pwd}/file/
   text: history.txt
   img: img/

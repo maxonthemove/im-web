@@ -3,13 +3,11 @@ package per.max.im.controller;
 import org.springframework.web.bind.annotation.*;
 import per.max.im.domain.MessageDTO;
 import per.max.im.domain.SendMessageRequest;
+import per.max.im.service.MessageService;
 
-import javax.servlet.http.Cookie;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <p>
@@ -22,50 +20,24 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequestMapping("/chat")
 public class ChatController {
 
-    private Map<String, List<MessageDTO>> messageMap = new ConcurrentHashMap<>();
-
+    @Resource
+    private MessageService messageService;
 
     @GetMapping("/getMessage")
     public List<MessageDTO> getMessage(@RequestParam String channel, HttpServletRequest request) {
-        List<MessageDTO> messageDTOS = messageMap.get(channel);
-        if (messageDTOS == null) {
-            messageDTOS = new LinkedList<>();
-            messageMap.put(channel, messageDTOS);
-        }
-        return messageMap.get(channel);
+        return messageService.getMessage(channel);
     }
 
 
     @PostMapping("/sendMessage")
     public void sendMessage(@RequestBody SendMessageRequest sendMessageRequest, HttpServletRequest request) {
-        List<MessageDTO> messageDTOS = messageMap.get(sendMessageRequest.getChannel());
-        if (messageDTOS == null) {
-            messageDTOS = new LinkedList<>();
-        }
-        MessageDTO messageDTO = new MessageDTO();
-        messageDTO.setMessage(sendMessageRequest.getMessage());
-        messageDTO.setUsername(getCookie(request, "username"));
-        messageDTO.setTimestamp(System.currentTimeMillis());
-        messageDTOS.add(messageDTO);
-        messageMap.put(sendMessageRequest.getChannel(), messageDTOS);
+        messageService.sendMessage(sendMessageRequest, request);
     }
 
-    private String getCookie(HttpServletRequest request, String key) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            return null;
-        }
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals(key)) {
-                return cookie.getValue();
-            }
-        }
-        return null;
-    }
 
     @GetMapping("/clear")
     public String clear() {
-        messageMap.clear();
+        messageService.clear();
         return "success";
     }
 }

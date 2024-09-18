@@ -23,9 +23,6 @@
     </div>
     <input type="text" id="username" name="username" autocomplete="off" style="height: 30px;font-size: 25px;">
     <button onclick="login()" style="width: 120px;height: 30px;font-size: 20px;font-weight: bold;margin-top: 20px;border-radius: 10px">Login</button>
-    <div style="font-weight: bold;margin-top: 20px;font-size: 20px">
-        All History Will be Deleted <br> After the Server Shutdown.
-    </div>
 </div>
 
 <script>
