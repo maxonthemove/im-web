@@ -14,7 +14,7 @@ java -jar target/IM-0.0.1-SNAPSHOT.jar
 Then visit `http://localhost:8888` in your browser.
 
 ## Features
-[x] text support
-[] picture support
-[] data persistence
-[] encryption
+- [x] text support
+- [ ] picture support
+- [ ] data persistence
+- [ ] encryption
