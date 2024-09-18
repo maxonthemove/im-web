@@ -34,3 +34,8 @@ spring:
 
 web-socket:
   host: wss://localhost/ws
+
+file:
+  relative-path: ./file/
+  text: history.txt
+  img: img/

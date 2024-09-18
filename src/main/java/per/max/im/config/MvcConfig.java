@@ -29,13 +29,16 @@ public class MvcConfig implements WebMvcConfigurer {
     @Autowired
     ObjectMapper objectMapper;
 
+    @Autowired
+    private FileConfig fileConfig;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //将所有/static/** 访问都映射到classpath:/static/ 目录下
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
         registry.addResourceHandler("/expand/**").addResourceLocations("classpath:/static/expand/");
         registry.addResourceHandler("/page/**").addResourceLocations("classpath:/static/page/");
-        registry.addResourceHandler("/file/**").addResourceLocations("classpath:/static/file/");
+        registry.addResourceHandler("/file/**").addResourceLocations(fileConfig.getRelativePath() + "/file/");
 
     }
 
