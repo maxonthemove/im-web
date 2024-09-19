@@ -118,7 +118,9 @@
         Login As: <span id="usernameText"></span>
     </div>
     <div style="position: absolute;top: 5px;right: 10px;">
-        <button style="font-size: 15px;font-weight:bold;border: none;background-color: forestgreen;height: 30px;color: white;border-radius: 3px;" onclick="getMessage()">refresh</button>
+        <button style="font-size: 15px;font-weight:bold;border: none;background-color: forestgreen;height: 30px;color: white;border-radius: 3px;" onclick="getMessage()">
+            <img src="/assets/img/refresh.png" width="25px" height="27px"/>
+        </button>
     </div>
     <hr style="width: 100%;height: 1px;background-color: #000;border: none">
     <div class="chatBox">
@@ -128,13 +130,13 @@
         <div style="max-width:500px;display: flex;flex-direction: row;flex-wrap: nowrap;align-content: center;justify-content: center;align-items: center;padding:20px 0px">
             <div id="imgBox">
                 <button style="font-weight: bold;height: 50px;font-size: 20px; background-color: forestgreen;border:none;color: #e3e3e3 ;line-height: 20px;border-radius: 3px" onclick="uploadImage()">
-                    img
+                    <img src="/assets/img/image.png" width="25px" height="25px"/>
                 </button>
             </div>
-            <textarea type="text" id="message" style="margin-left: 5px;max-width: 495px;width: 50vw;font-size: 20px;height: 50px;border:none;border-radius: 3px"></textarea>
-            <div id="sendBox" style="width: 15vw;margin-left: 5px; width: 60px;height: 50px;display: flex; flex-direction: column;
-    justify-content: flex-start;flex-wrap: nowrap;">
-                <button style="font-weight: bold;width:60px;height: 50px;font-size: 20px; background-color: forestgreen;border:none;color: #e3e3e3 ;border-radius: 3px" onclick="sendMessage()">send
+            <textarea type="text" id="message" style="margin: 0 5px;max-width: 495px;width: 50vw;font-size: 20px;height: 50px;border:none;border-radius: 3px"></textarea>
+            <div id="sendBox">
+                <button style="font-weight: bold;height: 50px;font-size: 20px; background-color: forestgreen;border:none;color: #e3e3e3 ;border-radius: 3px" onclick="sendMessage()">
+                    <img src="/assets/img/send-fill.png" width="30px" height="30px"/>
                 </button>
             </div>
         </div>
