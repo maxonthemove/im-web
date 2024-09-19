@@ -15,6 +15,6 @@ Then visit `http://localhost:8888` in your browser.
 
 ## Features
 - [x] text support
-- [ ] picture support
-- [ ] data persistence
-- [ ] encryption
+- [x] picture support
+- [x] data persistence
+- [x] encryption(nginx http basic auth)
